@@ -12,6 +12,8 @@ namespace PCPartPriceTracker.Models
 
         public string Name { get; set; }
 
+        public string Url { get; set; }
+
         public bool InStock { get; set; }
 
         public double TargetPrice { get; set; }

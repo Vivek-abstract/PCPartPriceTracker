@@ -23,5 +23,10 @@ namespace PCPartPriceTracker
         {
             InitializeComponent();
         }
+
+        private void NewItemVM_OnRequestClose(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

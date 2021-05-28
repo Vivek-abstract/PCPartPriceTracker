@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModels;
 
 namespace PCPartPriceTracker
 {
@@ -23,6 +24,12 @@ namespace PCPartPriceTracker
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewItemWindow window = new NewItemWindow();
+            window.ShowDialog();
         }
     }
 }

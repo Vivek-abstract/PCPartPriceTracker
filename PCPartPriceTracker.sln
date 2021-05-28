@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCPartPriceTracker", "PCPartPriceTracker\PCPartPriceTracker.csproj", "{7F746863-9801-4C8E-A7FA-C5BC67BD9857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCPartPriceTracker", "PCPartPriceTracker\PCPartPriceTracker.csproj", "{7F746863-9801-4C8E-A7FA-C5BC67BD9857}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{01DEEC35-CDE9-462B-9242-F78147046947}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{7F746863-9801-4C8E-A7FA-C5BC67BD9857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F746863-9801-4C8E-A7FA-C5BC67BD9857}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F746863-9801-4C8E-A7FA-C5BC67BD9857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DEEC35-CDE9-462B-9242-F78147046947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DEEC35-CDE9-462B-9242-F78147046947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DEEC35-CDE9-462B-9242-F78147046947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DEEC35-CDE9-462B-9242-F78147046947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
