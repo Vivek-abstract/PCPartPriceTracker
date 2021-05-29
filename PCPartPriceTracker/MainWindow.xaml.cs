@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModels;
+using ViewModels.Factories;
+using ViewModels.WebProcessors;
 
 namespace PCPartPriceTracker
 {
@@ -21,14 +23,24 @@ namespace PCPartPriceTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainVM vm;
         public MainWindow()
         {
             InitializeComponent();
+            vm = (MainVM) FindResource("vm");
+            //string url = "https://rptechindia.in/asus-graphics-card-dualgtx1660so6gmin.html";
+            //IWebProcessor processor = WebProcessorFactory.Create(url);
+            //var task = processor.GetPrice();
+            //task.Wait();
+            //double price = task.Result;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NewItemWindow window = new NewItemWindow();
+            NewItemVM newItemVM = new NewItemVM();
+            NewItemWindow window = new NewItemWindow { DataContext= newItemVM };
+            newItemVM.OnProductAdded += vm.RefreshPrices;
+            newItemVM.OnRequestClose += (s, e) => window.Close();
             window.ShowDialog();
         }
     }

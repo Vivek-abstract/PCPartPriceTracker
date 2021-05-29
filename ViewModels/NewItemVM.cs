@@ -12,18 +12,51 @@ namespace ViewModels
         private Product _product;
         private ProductContext _context = new ProductContext();
         public event EventHandler OnRequestClose;
-        public Product Product
+        public event EventHandler OnProductAdded;
+
+        public Product Product { get; set; }
+
+        private string _name;
+
+        public string Name
         {
-            get { return _product; }
+            get { return _name; }
+            set 
+            {
+                _name = value;
+                Product.Name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private string _url;
+
+        public string Url
+        {
+            get { return _url; }
             set 
             { 
-                _product = value;
-                OnPropertyChanged("Product");
+                _url = value;
+                Product.Url = value;
+                OnPropertyChanged("Url");
+            }
+        }
+
+        private double _targetPrice;
+
+        public double TargetPrice
+        {
+            get { return _targetPrice; }
+            set
+            {
+                _targetPrice = value;
+                Product.TargetPrice = value;
+                OnPropertyChanged("TargetPrice");
+
             }
         }
 
         public AddProductCommand AddProductCommand { get; set; }
-
 
         public NewItemVM()
         {
@@ -41,9 +74,11 @@ namespace ViewModels
 
         public void AddProduct()
         {
+            Product product = new Product { Name = Name, Url = Url, TargetPrice = TargetPrice };
             _context.Add(Product);
             _context.SaveChanges();
 
+            OnProductAdded?.Invoke(this, EventArgs.Empty);
             OnRequestClose?.Invoke(this, EventArgs.Empty);
         }
     }

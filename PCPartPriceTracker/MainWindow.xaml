@@ -11,22 +11,40 @@
         <vm:MainVM x:Key="vm" />
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
-        <StackPanel Margin="5">
-            <Button Content="New Item" Click="Button_Click" />
-            <ListView ItemsSource="{Binding Products}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Title" Grid.Row="0" Grid.Column="0"/>
-                            <TextBlock Text="Price" Grid.Column="1"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Content="New Item" Click="Button_Click" 
+                Grid.Row="0" Grid.ColumnSpan="2" Margin="5"/>
+        <TextBlock Text="Product Name" Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="5, 10, 5, 10"/>
+        <TextBlock Text="Product Price" Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="5, 10, 5, 10"/>
+        <ListView ItemsSource="{Binding Products}" 
+                  HorizontalContentAlignment="Stretch"
+                  Grid.Row="2"
+                  Grid.ColumnSpan="2"
+                  Margin="5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Price, StringFormat={}Rs 0}" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>
