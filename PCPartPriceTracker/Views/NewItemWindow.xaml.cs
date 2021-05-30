@@ -24,9 +24,11 @@ namespace PCPartPriceTracker
             InitializeComponent();
         }
 
-        private void NewItemVM_OnRequestClose(object sender, EventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Close();
+            TextBox tb = sender as TextBox;
+
+            e.Handled = !double.TryParse(tb.Text + e.Text, out double result);
         }
     }
 }

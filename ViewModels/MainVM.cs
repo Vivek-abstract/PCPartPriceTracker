@@ -24,25 +24,24 @@ namespace ViewModels
 
         public MainVM()
         {
-            Products = _context.Products.Local.ToObservableCollection();
-            InitializeProductPrices();
-        }
-
-        public async void InitializeProductPrices()
-        {
-            foreach (Product product in _context.Products)
-            {
-                product.Price = await WebProcessorFactory.Create(product.Url).GetPrice();
-                _context.SaveChanges();
-            }
+            Products = new ObservableCollection<Product>();
+            RefreshPrices(this, EventArgs.Empty);
         }
 
         public async void RefreshPrices(object sender, EventArgs e)
         {
-            foreach (Product product in _context.Products)
+            var products = _context.Products.ToList();
+            Products.Clear();
+
+            foreach (Product product in products)
             {
                 product.Price = await WebProcessorFactory.Create(product.Url).GetPrice();
                 _context.SaveChanges();
+            }
+
+            foreach (Product product in products.OrderBy(x => x.PriceColor).ThenBy(x=>x.Price))
+            {
+                Products.Add(product);
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ViewModels.Helpers;
 
 namespace ViewModels.Commands
 {
@@ -21,25 +22,16 @@ namespace ViewModels.Commands
             VM.PropertyChanged += (s, e) => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public event EventHandler<InvalidInputEventArgs> OnInvalidInput;
+
         public bool CanExecute(object parameter)
         {
-            Product product = parameter as Product;
-            if (product != null
-                && !string.IsNullOrWhiteSpace(product.Name)
-                && product.TargetPrice != 0
-                && IsValidUrl(product.Url))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
         private bool IsValidUrl(string url)
         {
-            if(url.Contains("rptechindia.in") 
+            if (!string.IsNullOrWhiteSpace(url) || url.Contains("rptechindia.in")
                 || url.Contains("vedantcomputers.com"))
             {
                 return true;
@@ -49,7 +41,28 @@ namespace ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            VM.AddProduct();
+            Product product = parameter as Product;
+            if (string.IsNullOrWhiteSpace(product.Name))
+            {
+                OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("Name cannot be empty"));
+            }
+            else if (string.IsNullOrWhiteSpace(product.Url))
+            {
+                OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL cannot be empty"));
+            }
+            else if (!product.Url.ToLower().Contains("rptechindia.in")
+              && !product.Url.ToLower().Contains("vedantcomputers.com"))
+            {
+                OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL not supported yet. Kindly use the supported websites"));
+            }
+            else if (product.TargetPrice == 0)
+            {
+                OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("Target price cannot be 0. There is an infinitesimal chance you will get the product for free!"));
+            }    
+            else
+            {
+                VM.AddProduct();
+            }
         }
     }
 }

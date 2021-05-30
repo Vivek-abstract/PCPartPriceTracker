@@ -5,20 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PCPartPriceTracker"
         mc:Ignorable="d"
-        Title="NewItemWindow" Height="450" Width="800">
+        Title="Add Product" Height="450" Width="800"
+        Background="{StaticResource BackgroundColor}"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="543*"/>
             <ColumnDefinition Width="257*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="15,15,15,15" Grid.ColumnSpan="2">
-            <TextBlock Text="Name" Margin="0 5 0 0" />
-            <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="URL"  Margin="0 5 0 0"/>
-            <TextBox Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Target Price (₹)"  Margin="0 5 0 0"/>
-            <TextBox Text="{Binding TargetPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button  Content="Add"  Margin="0 5 0 0"  Command="{Binding AddProductCommand}" CommandParameter="{Binding Product}"/>
+            <TextBlock Text="Name" Margin="0 5 0 0" 
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"/>
+            <TextBlock Text="URL"  Margin="0 5 0 0"
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"/>
+            <TextBlock Text="Target Price (₹)"  Margin="0 5 0 0"
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding TargetPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"
+                     PreviewTextInput="TextBox_PreviewTextInput"/>
+            <Button Content="Add" 
+                Grid.Row="0" Grid.ColumnSpan="2"
+                Width="100"
+                Background="{StaticResource PinkColor}"
+                Foreground="{StaticResource BackgroundColor}"
+                Command="{Binding AddProductCommand}" 
+                CommandParameter="{Binding Product}"
+                Margin="0,15,0,0"
+                >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

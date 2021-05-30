@@ -4,12 +4,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ViewModels.Commands;
+using ViewModels.Helpers;
+using System.Windows;
+using ViewModels.Factories;
 
 namespace ViewModels
 {
     public class NewItemVM : INotifyPropertyChanged
     {
-        private Product _product;
         private ProductContext _context = new ProductContext();
         public event EventHandler OnRequestClose;
         public event EventHandler OnProductAdded;
@@ -52,17 +54,22 @@ namespace ViewModels
                 _targetPrice = value;
                 Product.TargetPrice = value;
                 OnPropertyChanged("TargetPrice");
-
             }
         }
 
+        public event EventHandler<InvalidInputEventArgs> OnInvalidInput;
         public AddProductCommand AddProductCommand { get; set; }
 
         public NewItemVM()
         {
-            //Product = new Product { Name = "Vivek", Url = "a.b.com", TargetPrice = 123 };
             Product = new Product();
             AddProductCommand = new AddProductCommand(this);
+            AddProductCommand.OnInvalidInput += AddProductCommand_OnInvalidInput;
+        }
+
+        private void AddProductCommand_OnInvalidInput(object sender, InvalidInputEventArgs e)
+        {
+            OnInvalidInput?.Invoke(this, e);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,6 +82,7 @@ namespace ViewModels
         public void AddProduct()
         {
             Product product = new Product { Name = Name, Url = Url, TargetPrice = TargetPrice };
+
             _context.Add(Product);
             _context.SaveChanges();
 

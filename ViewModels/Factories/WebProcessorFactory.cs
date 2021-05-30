@@ -15,6 +15,10 @@ namespace ViewModels.Factories
             {
                 return new RPTechWebProcessor(url);
             } 
+            else if (url.ToLower().Contains("vedantcomputers.com"))
+            {
+                return new VedantComputersWebProcessor(url);
+            }
             else
             {  
                 throw new ArgumentException("Url not supported by application yet.");

@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:PCPartPriceTracker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="BackgroundColor" Color="#282a36"/>
+        <SolidColorBrush x:Key="PinkColor" Color="#ff79c6"/>
+        <SolidColorBrush x:Key="Heading" Color="#8be9fd"/>
+        <SolidColorBrush x:Key="Comment" Color="#6272a4" />
+        <SolidColorBrush x:Key="White" Color="#f8f8f2" />
+        <SolidColorBrush x:Key="CurrentLine" Color="#44475a" />
+        <!--<Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Assets\Fonts\#Montserrat-Regular"
+        </Style>-->
     </Application.Resources>
 </Application>
