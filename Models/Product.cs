@@ -27,7 +27,7 @@ namespace PCPartPriceTracker.Models
         {
             get
             {
-                return Price <= TargetPrice ? "#50fa7b" : "Red" ;
+                return (Price <= TargetPrice) && InStock ? "#50fa7b" : "#ff5555";
             }
         }
 

@@ -28,14 +28,16 @@ namespace ViewModels
             RefreshPrices(this, EventArgs.Empty);
         }
 
-        public async void RefreshPrices(object sender, EventArgs e)
+        public void RefreshPrices(object sender, EventArgs e)
         {
             var products = _context.Products.ToList();
             Products.Clear();
 
             foreach (Product product in products)
             {
-                product.Price = await WebProcessorFactory.Create(product.Url).GetPrice();
+                Product updatedProduct = WebProcessorFactory.Create(product.Url).GetProductStockAndPrice(product);
+                product.Price = updatedProduct.Price;
+                product.InStock = updatedProduct.InStock;
                 _context.SaveChanges();
             }
 

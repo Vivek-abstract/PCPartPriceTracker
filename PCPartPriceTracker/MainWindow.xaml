@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PCPartPriceTracker"
         xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
+        xmlns:conv="clr-namespace:PCPartPriceTracker.Converters"
         xml:lang="hi-IN"
         mc:Ignorable="d"
         Title="PC Part Price Tracker" Height="450" Width="800"
@@ -12,6 +13,7 @@
         >
     <Window.Resources>
         <vm:MainVM x:Key="vm" />
+        <conv:StockConverter x:Key="stockConverter"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
@@ -78,10 +80,13 @@
                                        Foreground="{StaticResource Comment}"
                                        Margin="0, 5, 0, 0"/>
                         </StackPanel>
-                        <TextBlock Text="{Binding Price, StringFormat={}{0:c0}}" 
-                                   FontSize="25" 
-                                   Grid.Column="1"
-                                   Foreground="{Binding PriceColor}"/>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="{Binding Price, StringFormat={}{0:c0}}" 
+                                       FontSize="25" 
+                                       Foreground="{Binding PriceColor}"/>
+                            <TextBlock Text="{Binding InStock, Converter={StaticResource stockConverter}}"
+                                       Foreground="{StaticResource Comment}"/>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

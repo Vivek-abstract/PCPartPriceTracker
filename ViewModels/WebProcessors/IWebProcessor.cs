@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCPartPriceTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace ViewModels.WebProcessors
     public interface IWebProcessor
     {
         string Url { get; set; }
-        Task<double> GetPrice();
+        Product GetProductStockAndPrice(Product product);
     }
 }
