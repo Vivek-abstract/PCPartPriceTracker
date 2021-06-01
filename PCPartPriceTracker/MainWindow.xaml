@@ -9,6 +9,7 @@
         xml:lang="hi-IN"
         mc:Ignorable="d"
         Title="PC Part Price Tracker" Height="450" Width="800"
+        MinWidth="700"
         Background="{StaticResource BackgroundColor}"
         >
     <Window.Resources>
@@ -22,8 +23,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Content="New Item" Click="Button_Click" 
                 Grid.Row="0" Grid.ColumnSpan="2"
@@ -38,16 +39,17 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Text="Product Details" Grid.Row="1"
+        <TextBlock Text="Product Details" 
+                   Grid.Row="1"
                    Grid.Column="0"
                    FontFamily="Assets/Fonts/#Montserrat"
                    Foreground="{StaticResource White}"
                    FontSize="20"
-                   Margin="5, 10, 5, 10"/>
-        <TextBlock Text="Product Price" Grid.Row="1"
+                   Margin="5, 10, 0, 10"/>
+        <TextBlock Text="Product Price" 
+                   Grid.Row="1"
                    Grid.Column="1"
-                   HorizontalAlignment="Right"
-                   Margin="5,10,40,10"
+                   Margin="30,10,0,10"
                    FontFamily="Assets/Fonts/#Montserrat"
                    FontSize="20"
                    Foreground="{StaticResource White}"
@@ -60,33 +62,57 @@
                   Background="{StaticResource BackgroundColor}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="0, 8, 0, 0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="650"/>
+                            <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Margin="0,5,0,0">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
                             <TextBlock Text="{Binding Name}"
+                                   Grid.Row="0"
                                    FontWeight="Bold"
-                                       Foreground="{StaticResource Heading}"
-                                   FontSize="15"/>
-                            <TextBlock Margin="0, 5, 0, 0">
-                                 <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate" Foreground="{StaticResource PinkColor}">
-                                     <TextBlock Text="{Binding Url}" 
-                                       TextWrapping="Wrap" />
-                                  </Hyperlink>
-                            </TextBlock>
+                                   Foreground="{StaticResource Heading}"
+                                   FontSize="18"/>
+                            <TextBlock Grid.Row="1"
+                                   TextWrapping="Wrap">
+                            <Hyperlink NavigateUri="{Binding Url}" 
+                                       RequestNavigate="Hyperlink_RequestNavigate" Foreground="{StaticResource PinkColor}">
+                                <TextBlock Text="{Binding Url}" 
+                                           TextWrapping="Wrap"
+                                           MaxWidth="500"/>
+                            </Hyperlink>
+                        </TextBlock>
                             <TextBlock Text="{Binding TargetPrice, StringFormat=Target Price: {0:c0}}"
-                                       Foreground="{StaticResource Comment}"
-                                       Margin="0, 5, 0, 0"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1">
+                                   Grid.Row="2"
+                                   Foreground="{StaticResource Comment}"
+                                   Margin="0, 5, 0, 0"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
                             <TextBlock Text="{Binding Price, StringFormat={}{0:c0}}" 
-                                       FontSize="25" 
-                                       Foreground="{Binding PriceColor}"/>
+                                   Grid.Row="0"
+                                   FontSize="25" 
+                                   Margin="50,0,0,0"
+                                   Foreground="{Binding PriceColor}"/>
                             <TextBlock Text="{Binding InStock, Converter={StaticResource stockConverter}}"
-                                       Foreground="{StaticResource Comment}"/>
-                        </StackPanel>
+                                   Grid.Row="1"
+                                   Margin="50,0,0,0"
+                                   Foreground="{StaticResource Comment}"/>
+                        </Grid>
+                        
+                       
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -45,13 +45,13 @@ namespace ViewModels.WebProcessors
 
             var node = htmlDoc.DocumentNode.SelectSingleNode("//html/body/div[1]/main/div[3]/div/section/div/div[1]/div[2]/div/div[2]/div/div[2]/span[1]/span/div/span/span/span");
 
-            if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+            if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
             {
                 product.Price = price;
             }
             else
             {
-                throw new HtmlWebException("Price not present");
+                product.Price = -1;
             }
 
             node = htmlDoc.DocumentNode.QuerySelector("#buy-now");
