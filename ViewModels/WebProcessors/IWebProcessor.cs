@@ -10,6 +10,6 @@ namespace ViewModels.WebProcessors
     public interface IWebProcessor
     {
         string Url { get; set; }
-        Product GetProductStockAndPrice(Product product);
+        Task<Product> GetProductStockAndPrice(Product product);
     }
 }

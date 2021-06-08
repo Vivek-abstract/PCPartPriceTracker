@@ -10,6 +10,7 @@
         <SolidColorBrush x:Key="Comment" Color="#6272a4" />
         <SolidColorBrush x:Key="White" Color="#f8f8f2" />
         <SolidColorBrush x:Key="CurrentLine" Color="#44475a" />
+        <SolidColorBrush x:Key="Danger" Color="#ff5555" />
         <!--<Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Assets\Fonts\#Montserrat-Regular"
         </Style>-->

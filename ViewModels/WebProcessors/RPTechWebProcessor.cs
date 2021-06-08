@@ -19,53 +19,47 @@ namespace ViewModels.WebProcessors
             Url = url;
         }
 
-        //public Task<double> GetPrice()
-        //{
-        //    HtmlWeb web = new HtmlWeb();
-
-        //    var htmlDoc = web.Load(Url);
-
-        //    var node = htmlDoc.DocumentNode.SelectSingleNode("//html/body/div[1]/main/div[3]/div/section/div/div[1]/div[2]/div/div[2]/div/div[2]/span[1]/span/div/span/span/span");
-
-        //    if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
-        //    {
-        //        return price;
-        //    } 
-        //    else
-        //    {
-        //        throw new HtmlWebException("Price not present");
-        //    }
-        //}
-
-        public Product GetProductStockAndPrice(Product product)
+        public Task<Product> GetProductStockAndPrice(Product product)
         {
-            HtmlWeb web = new HtmlWeb();
-
-            var htmlDoc = web.Load(Url);
-
-            var node = htmlDoc.DocumentNode.SelectSingleNode("//html/body/div[1]/main/div[3]/div/section/div/div[1]/div[2]/div/div[2]/div/div[2]/span[1]/span/div/span/span/span");
-
-            if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+            return Task.Run(() =>
             {
-                product.Price = price;
-            }
-            else
-            {
-                product.Price = -1;
-            }
+                try
+                {
 
-            node = htmlDoc.DocumentNode.QuerySelector("#buy-now");
+                    HtmlWeb web = new HtmlWeb();
 
-            if(node != null)
-            {
-                product.InStock = true;
-            } 
-            else
-            {
-                product.InStock = false;
-            }
+                    var htmlDoc = web.Load(Url);
 
-            return product;
+                    var node = htmlDoc.DocumentNode.SelectSingleNode("//html/body/div[1]/main/div[3]/div/section/div/div[1]/div[2]/div/div[2]/div/div[2]/span[1]/span/div/span/span/span");
+
+                    if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+                    {
+                        product.Price = price;
+                    }
+                    else
+                    {
+                        product.Price = -1;
+                    }
+
+                    node = htmlDoc.DocumentNode.QuerySelector("#buy-now");
+
+                    if (node != null)
+                    {
+                        product.InStock = true;
+                    }
+                    else
+                    {
+                        product.InStock = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    product.Price = -1;
+                    product.InStock = false;
+                }
+
+                return product;
+            });
         }
     }
 }

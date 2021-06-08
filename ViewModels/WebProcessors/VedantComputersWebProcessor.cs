@@ -18,35 +18,46 @@ namespace ViewModels.WebProcessors
             Url = url;
         }
 
-        public Product GetProductStockAndPrice(Product product)
+        public Task<Product> GetProductStockAndPrice(Product product)
         {
-            HtmlWeb web = new HtmlWeb();
-
-            HtmlDocument htmlDoc = web.Load(Url);
-
-            var node = htmlDoc.QuerySelector(".product-price");
-
-            if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+            return Task.Run(() =>
             {
-                product.Price = price;
-            }
-            else
-            {
-                throw new HtmlWebException("Price not present");
-            }
+                try
+                {
+                    HtmlWeb web = new HtmlWeb();
 
-            node = htmlDoc.DocumentNode.QuerySelector(".product-info");
+                    HtmlDocument htmlDoc = web.Load(Url);
 
-            if (node.HasClass("out-of-stock"))
-            {
-                product.InStock = false;
-            }
-            else
-            {
-                product.InStock = true;
-            }
+                    var node = htmlDoc.QuerySelector(".product-price");
 
-            return product;
+                    if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+                    {
+                        product.Price = price;
+                    }
+                    else
+                    {
+                        product.Price = -1;
+                    }
+
+                    node = htmlDoc.DocumentNode.QuerySelector(".product-info");
+
+                    if (node.HasClass("out-of-stock"))
+                    {
+                        product.InStock = false;
+                    }
+                    else
+                    {
+                        product.InStock = true;
+                    }
+                } 
+                catch(Exception ex)
+                {
+                    product.InStock = false;
+                    product.Price = -1;
+                }
+
+                return product;
+            });
         }
     }
 }

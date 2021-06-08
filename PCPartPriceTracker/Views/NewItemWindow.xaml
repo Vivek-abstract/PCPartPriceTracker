@@ -10,8 +10,8 @@
         >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="543*"/>
-            <ColumnDefinition Width="257*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Margin="15,15,15,15" Grid.ColumnSpan="2">
             <TextBlock Text="Name" Margin="0 5 0 0" 
@@ -33,7 +33,7 @@
                      Background="{StaticResource CurrentLine}"
                      Foreground="{StaticResource Heading}"
                      PreviewTextInput="TextBox_PreviewTextInput"/>
-            <Button Content="Add" 
+            <Button Content="Save" 
                 Grid.Row="0" Grid.ColumnSpan="2"
                 Width="100"
                 Background="{StaticResource PinkColor}"

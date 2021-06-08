@@ -1,0 +1,84 @@
+﻿<Window x:Class="PCPartPriceTracker.Views.EditItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PCPartPriceTracker.Views"
+        mc:Ignorable="d"
+        Title="Edit Product" Height="450" Width="800"
+        Background="{StaticResource BackgroundColor}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="15,15,15,15" Grid.ColumnSpan="2">
+            <TextBlock Text="Name" Margin="0 5 0 0" 
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"/>
+            <TextBlock Text="URL"  Margin="0 5 0 0"
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"/>
+            <TextBlock Text="Target Price (₹)"  Margin="0 5 0 0"
+                       FontSize="18"
+                       Foreground="{StaticResource PinkColor}"/>
+            <TextBox Text="{Binding TargetPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource CurrentLine}"
+                     Foreground="{StaticResource Heading}"
+                     PreviewTextInput="TextBox_PreviewTextInput"/>
+
+            <Grid Grid.ColumnSpan="2" Margin="0,15,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="Save"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="3"
+                        Width="100"
+                        Background="{StaticResource PinkColor}"
+                        Foreground="{StaticResource BackgroundColor}"
+                        Command="{Binding EditProductCommand}" 
+                        CommandParameter="{Binding Product}"
+                        Margin="0,15,0,0"
+                        >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Delete" 
+                        Grid.Column="4"
+                        Grid.ColumnSpan="3"
+                        Width="100"
+                        Background="{StaticResource Danger}"
+                        Foreground="{StaticResource BackgroundColor}"
+                        Command="{Binding DeleteProductCommand}" 
+                        CommandParameter="{Binding Product}"
+                        Margin="0,15,0,0"
+                        >   
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+           
+        </StackPanel>
+    </Grid>
+</Window>
