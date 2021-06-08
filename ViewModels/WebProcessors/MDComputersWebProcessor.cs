@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ViewModels.WebProcessors
 {
-    public class VedantComputersWebProcessor : IWebProcessor
+    public class MDComputersWebProcessor : IWebProcessor
     {
         public string Url { get; set; }
 
-        public VedantComputersWebProcessor(string url)
+        public MDComputersWebProcessor(string url)
         {
             Url = url;
         }
@@ -24,13 +24,14 @@ namespace ViewModels.WebProcessors
             {
                 try
                 {
+
                     HtmlWeb web = new HtmlWeb();
 
-                    HtmlDocument htmlDoc = web.Load(Url);
+                    var htmlDoc = web.Load(Url);
 
-                    var node = htmlDoc.QuerySelector(".product-price");
+                    var node = htmlDoc.DocumentNode.SelectSingleNode("/html/body/div[1]/div[3]/div/div/div[2]/div/div[2]/div[3]/span/span");
 
-                    if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+                    if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
                     {
                         product.Price = price;
                     }
@@ -39,9 +40,9 @@ namespace ViewModels.WebProcessors
                         product.Price = -1;
                     }
 
-                    node = htmlDoc.DocumentNode.QuerySelector(".product-info");
-                    
-                    if (node != null && !node.HasClass("out-of-stock"))
+                    node = htmlDoc.DocumentNode.QuerySelector(".stock");
+
+                    if (node != null && !node.InnerText.Contains("Out Of Stock"))
                     {
                         product.InStock = true;
                     }
@@ -49,11 +50,11 @@ namespace ViewModels.WebProcessors
                     {
                         product.InStock = false;
                     }
-                } 
-                catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    product.InStock = false;
                     product.Price = -1;
+                    product.InStock = false;
                 }
 
                 return product;

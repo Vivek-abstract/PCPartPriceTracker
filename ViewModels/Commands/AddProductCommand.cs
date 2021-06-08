@@ -29,16 +29,6 @@ namespace ViewModels.Commands
             return true;
         }
 
-        private bool IsValidUrl(string url)
-        {
-            if (!string.IsNullOrWhiteSpace(url) || url.Contains("rptechindia.in")
-                || url.Contains("vedantcomputers.com"))
-            {
-                return true;
-            }
-            return false;
-        }
-
         public void Execute(object parameter)
         {
             Product product = parameter as Product;
@@ -50,8 +40,7 @@ namespace ViewModels.Commands
             {
                 OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL cannot be empty"));
             }
-            else if (!product.Url.ToLower().Contains("rptechindia.in")
-              && !product.Url.ToLower().Contains("vedantcomputers.com"))
+            else if (!UrlValidator.IsValid(product.Url))
             {
                 OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL not supported yet. Kindly use the supported websites"));
             }

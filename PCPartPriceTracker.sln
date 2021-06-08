@@ -10,9 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{F697E6FA-2187-49C9-BD1C-35A9E1D95F95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89B601E2-10CA-47CB-A36C-F4FFB87A44A2}"
-	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

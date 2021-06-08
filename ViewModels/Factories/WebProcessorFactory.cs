@@ -19,6 +19,10 @@ namespace ViewModels.Factories
             {
                 return new VedantComputersWebProcessor(url);
             }
+            else if (url.ToLower().Contains("mdcomputers.in"))
+            {
+                return new MDComputersWebProcessor(url);
+            }
             else
             {  
                 throw new ArgumentException("Url not supported by application yet.");

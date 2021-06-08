@@ -38,8 +38,7 @@ namespace ViewModels.Commands
             {
                 OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL cannot be empty"));
             }
-            else if (!VM.Url.ToLower().Contains("rptechindia.in")
-              && !VM.Url.ToLower().Contains("vedantcomputers.com"))
+            else if (!UrlValidator.IsValid(VM.Url))
             {
                 OnInvalidInput?.Invoke(this, new InvalidInputEventArgs("URL not supported yet. Kindly use the supported websites"));
             }
