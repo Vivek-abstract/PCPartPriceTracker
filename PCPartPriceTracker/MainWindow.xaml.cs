@@ -41,7 +41,6 @@ namespace PCPartPriceTracker
         }
         private void SetupAutoRefresh()
         {
-            int autoRefreshTime = int.Parse(ConfigurationManager.AppSettings.Get("AutoRefreshTime"));
             refreshTimer = new Timer(e =>
             {
                 App.Current.Dispatcher.Invoke(async () => await VM.RefreshPricesAsync());
