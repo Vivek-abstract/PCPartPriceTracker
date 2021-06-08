@@ -10,9 +10,10 @@ namespace ViewModels.Helpers
     {
         public static bool IsValid(string url)
         {
-            if (!string.IsNullOrWhiteSpace(url) || url.Contains("rptechindia.in")
-               || url.Contains("vedantcomputers.com")
-               || url.Contains("mdcomputers.in"))
+            if (!string.IsNullOrWhiteSpace(url) && (url.Contains("rptechindia.in")
+                || url.Contains("vedantcomputers.com")
+                || url.Contains("mdcomputers.in")
+                || url.Contains("www.primeabgb.com")))
             {
                 return true;
             }

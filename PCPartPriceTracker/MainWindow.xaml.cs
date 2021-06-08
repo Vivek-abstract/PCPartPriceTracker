@@ -2,6 +2,7 @@
 using PCPartPriceTracker.Views;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -37,14 +38,10 @@ namespace PCPartPriceTracker
             InitializeComponent();
             VM = (MainVM)FindResource("vm");
             SetupAutoRefresh();
-            //string url = "https://www.vedantcomputers.com/gigabyte-geforce-gtx-1660-super-oc-6gb-gddr6";
-            //IWebProcessor processor = WebProcessorFactory.Create(url);
-            //var task = processor.GetPrice();
-            //task.Wait();
-            //double price = task.Result;
         }
         private void SetupAutoRefresh()
         {
+            int autoRefreshTime = int.Parse(ConfigurationManager.AppSettings.Get("AutoRefreshTime"));
             refreshTimer = new Timer(e =>
             {
                 App.Current.Dispatcher.Invoke(async () => await VM.RefreshPricesAsync());

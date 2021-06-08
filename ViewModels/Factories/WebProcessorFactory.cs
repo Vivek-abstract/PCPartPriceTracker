@@ -23,6 +23,10 @@ namespace ViewModels.Factories
             {
                 return new MDComputersWebProcessor(url);
             }
+            else if (url.ToLower().Contains("primeabgb.com"))
+            {
+                return new PrimeAbgbWebProcessor(url);
+            }
             else
             {  
                 throw new ArgumentException("Url not supported by application yet.");

@@ -23,7 +23,7 @@ namespace PCPartPriceTracker.Converters
             {
                 return true;
             }
-            else;
+            else
             {
                 return false;
             }

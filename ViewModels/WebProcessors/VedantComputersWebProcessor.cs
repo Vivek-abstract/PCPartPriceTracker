@@ -30,7 +30,7 @@ namespace ViewModels.WebProcessors
 
                     var node = htmlDoc.QuerySelector(".product-price");
 
-                    if (double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
+                    if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))
                     {
                         product.Price = price;
                     }
