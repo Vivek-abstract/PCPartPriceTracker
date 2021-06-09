@@ -13,7 +13,7 @@ namespace ViewModels.Helpers
             if (!string.IsNullOrWhiteSpace(url) && (url.Contains("rptechindia.in")
                 || url.Contains("vedantcomputers.com")
                 || url.Contains("mdcomputers.in")
-                || url.Contains("www.primeabgb.com")))
+                || url.Contains("primeabgb.com")))
             {
                 return true;
             }

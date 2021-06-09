@@ -13,5 +13,16 @@ namespace PCPartPriceTracker
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
+            MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            e.Handled = true;
+        }
     }
 }

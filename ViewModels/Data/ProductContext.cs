@@ -14,7 +14,7 @@ namespace PCPartPriceTracker.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=C:\Users\vivek\source\repos\PCPartPriceTracker\ViewModels\products.db");
+            optionsBuilder.UseSqlite(@"Data Source=products.db");
             base.OnConfiguring(optionsBuilder);
         }
     }

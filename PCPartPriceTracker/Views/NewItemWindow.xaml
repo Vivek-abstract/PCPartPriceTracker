@@ -26,6 +26,9 @@
             <TextBox Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Background="{StaticResource CurrentLine}"
                      Foreground="{StaticResource Heading}"/>
+            <TextBlock Text="Supported Sites: rptechindia.in, mdcomputers.in, vedantcomputers.com, primeabgb.com"
+                       Foreground="{StaticResource Comment}"
+                       Margin="0,4,0,0"/>
             <TextBlock Text="Target Price (₹)"  Margin="0 5 0 0"
                        FontSize="18"
                        Foreground="{StaticResource PinkColor}"/>

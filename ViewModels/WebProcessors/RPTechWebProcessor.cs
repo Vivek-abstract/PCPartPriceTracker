@@ -29,7 +29,7 @@ namespace ViewModels.WebProcessors
                     HtmlWeb web = new HtmlWeb();
 
                     var htmlDoc = web.Load(Url);
-
+                    
                     var node = htmlDoc.DocumentNode.SelectSingleNode("//html/body/div[1]/main/div[3]/div/section/div/div[1]/div[2]/div/div[2]/div/div[2]/span[1]/span/div/span/span/span");
 
                     if (node != null && double.TryParse(node.InnerText.Trim(new char[] { '₹' }), out double price))

@@ -124,6 +124,7 @@
         </TextBlock>
         <ListView ItemsSource="{Binding Products}" 
                   SelectionChanged="ListView_SelectionChanged" 
+                  MouseDoubleClick="ListView_MouseDoubleClick"
                   HorizontalContentAlignment="Stretch"
                   Grid.Row="2"
                   Grid.ColumnSpan="2"

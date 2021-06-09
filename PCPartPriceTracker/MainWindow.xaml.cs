@@ -75,14 +75,30 @@ namespace PCPartPriceTracker
 
             if (product != null)
             {
-                EditItemVM editItemVM = new EditItemVM(product);
-                EditItemWindow window = new EditItemWindow { DataContext = editItemVM };
-                editItemVM.OnProductEdited += async (s, e) => await VM.RefreshPricesAsync();
-                editItemVM.OnRequestClose += (s, e) => window.Close();
-                editItemVM.OnInvalidInput += NewItemVM_OnInvalidInput;
-                window.ShowDialog();
+                LaunchEditWindow(product);
             }
 
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView lview = sender as ListView;
+            Product product = lview.SelectedItem as Product;
+
+            if (product != null)
+            {
+                LaunchEditWindow(product);
+            }
+        }
+
+        private void LaunchEditWindow(Product product)
+        {
+            EditItemVM editItemVM = new EditItemVM(product);
+            EditItemWindow window = new EditItemWindow { DataContext = editItemVM };
+            editItemVM.OnProductEdited += async (s, e) => await VM.RefreshPricesAsync();
+            editItemVM.OnRequestClose += (s, e) => window.Close();
+            editItemVM.OnInvalidInput += NewItemVM_OnInvalidInput;
+            window.ShowDialog();
         }
     }
 }

@@ -41,6 +41,7 @@ namespace ViewModels
 
         public MainVM()
         {
+            _context.Database.Migrate();
             Products = new ObservableCollection<Product>();
             RefreshProductsCommand = new RefreshProductsCommand(this);
             PopulateProducts();
