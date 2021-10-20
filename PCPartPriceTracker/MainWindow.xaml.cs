@@ -37,8 +37,16 @@ namespace PCPartPriceTracker
         {
             InitializeComponent();
             VM = (MainVM)FindResource("vm");
+            VM.OnProductPriceReachedBelowTarget += VM_OnProductPriceReachedBelowTarget;
             SetupAutoRefresh();
         }
+
+        private void VM_OnProductPriceReachedBelowTarget(object sender, ViewModels.Helpers.PriceReachedTargetEventArgs e)
+        {
+            MessageBox.Show("The following products have reached below your target price and are in stock: " + e.Products, "Target Price Reached!", 
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         private void SetupAutoRefresh()
         {
             refreshTimer = new Timer(e =>
