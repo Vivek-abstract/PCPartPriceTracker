@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ViewModels.Commands;
 using ViewModels.Factories;
+using ViewModels.Helpers;
 
 namespace ViewModels
 {
@@ -21,6 +22,7 @@ namespace ViewModels
 
         private bool _loading;
 
+
         public bool Loading
         {
             get { return _loading; }
@@ -30,6 +32,8 @@ namespace ViewModels
                 OnPropertyChanged("Loading");
             }
         }
+
+        public event EventHandler<PriceReachedTargetEventArgs> OnProductPriceReachedBelowTarget;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,6 +70,7 @@ namespace ViewModels
             Loading = true;
             var products = await _context.Products.ToListAsync();
             var tasks = new List<Task<Product>>();
+            var productsBelowTarget = new List<Product>();
 
             foreach (Product product in products)
             {
@@ -79,7 +84,12 @@ namespace ViewModels
                 var updatedProduct = updatedProducts.Where(p => p.Id == product.Id).SingleOrDefault();
                 product.Price = updatedProduct.Price;
                 product.InStock = updatedProduct.InStock;
+                if (product.Price <= product.TargetPrice && product.InStock)
+                {
+                    productsBelowTarget.Add(product);
+                }
             }
+
             await _context.SaveChangesAsync();
 
             Products.Clear();
@@ -88,6 +98,11 @@ namespace ViewModels
                 Products.Add(product);
             }
             Loading = false;
+
+            if (productsBelowTarget.Count > 0)
+            {
+                OnProductPriceReachedBelowTarget.Invoke(this, new PriceReachedTargetEventArgs(string.Join(",", productsBelowTarget.Select(p => p.Name))));
+            }
         }
     }
 }
